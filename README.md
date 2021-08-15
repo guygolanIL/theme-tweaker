@@ -21,7 +21,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import {createThemeTweaker} from 'theme-tweaker'
-import {theme} from './theme/mytheme'
+
+export type Theme = {my: string};
+const theme: Theme = {my: 'theme'};
 
 const Provider = createThemeTweaker();
 
@@ -34,7 +36,7 @@ ReactDOM.render(
 ```
 
 ## Using a third party library (Material UI for example)
-### pass that library theme provider to the createThemeTweaker function and use the returned Provider the same way.
+### Pass that library theme provider to the createThemeTweaker function and use the returned Provider the same way.
 ```tsx
 // index.tsx
 import React from 'react';
@@ -55,6 +57,26 @@ ReactDOM.render(
 ,
   document.getElementById('root')
 );
+```
+
+## Modifying your theme from a component
+```tsx
+import {useThemeTweaker} from 'theme-tweaker';
+import React from 'react';
+import {Theme} from './index';
+
+const App = () => {
+  const {theme, setThemeProp} = useThemeTweaker<Theme>();
+  
+  return (
+    <div>
+      <button onClick={() => setThemeProp("my", "edited theme")}>Change</button>
+      {JSON.stringify(theme)}
+    </div>
+  );
+}
+
+export default App
 ```
 ## License
 
