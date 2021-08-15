@@ -1,10 +1,20 @@
-import React from 'react'
+import {useThemeTweaker} from 'theme-tweaker';
+import React from 'react';
 
-import { ExampleComponent } from 'theme-tweaker'
-import 'theme-tweaker/dist/index.css'
+type Theme = {my: string};
+
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  const {theme, setThemeProp} = useThemeTweaker<Theme>();
+  
+
+
+  return (
+    <div>
+      <button onClick={() => setThemeProp("my", "edited theme")}>Change</button>
+      {JSON.stringify(theme)}
+    </div>
+  );
 }
 
 export default App
