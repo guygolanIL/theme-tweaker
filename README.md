@@ -22,8 +22,8 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import {createThemeTweaker} from 'theme-tweaker'
 
-export type Theme = {my: string};
-const theme: Theme = {my: 'theme'};
+export type Theme = {mode: "light" | "dark"};
+const theme: Theme = {mode: "light"};
 
 const Provider = createThemeTweaker();
 
@@ -46,9 +46,9 @@ import {theme} from './theme/theme';
 import MuiProvider from '@material-ui/styles/ThemeProvider';
 import { createThemeTweaker } from './theme/themeTweaker/themeTweaker';
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.REACT_APP_ENV === "development";
 
-const ThemeProvider = isDev ? createThemeTweaker(MuiProvider) : MuiProvider; 
+const ThemeProvider = isDev ? createThemeTweaker(MuiProvider) : MuiProvider;
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>
@@ -67,10 +67,10 @@ import {Theme} from './index';
 
 const App = () => {
   const {theme, setThemeProp} = useThemeTweaker<Theme>();
-  
+
   return (
     <div>
-      <button onClick={() => setThemeProp("my", "edited theme")}>Change</button>
+      <button onClick={() => setThemeProp("mode", "dark")}>Change</button>
       {JSON.stringify(theme)}
     </div>
   );
